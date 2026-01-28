@@ -1,0 +1,26 @@
+namespace: produccion
+
+mysql:
+  image: mysql:8.0
+  database: wordpress
+  user: wpuser
+  password: wppassword
+  rootPassword: rootpassword
+
+  persistence:
+    enabled: true
+    size: 10Gi
+    storageClass: do-block-storage-retain
+
+wordpress:
+  image: wordpress:php8.2-apache
+  replicas: 1
+
+  persistence:
+    enabled: true
+    size: 10Gi
+    storageClass: do-block-storage-retain
+
+service:
+  type: ClusterIP
+  port: 80
